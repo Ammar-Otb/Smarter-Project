@@ -1,6 +1,7 @@
 package com.example.capstoneproject.student;
 
 import com.example.capstoneproject.DTO.API;
+import com.example.capstoneproject.courses.Course;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,22 @@ public class StudentController {
     public ResponseEntity getStudents(){
         return ResponseEntity.status(200).body(studentService.getStudents());
     }
+    @GetMapping("courses")
+    public ResponseEntity getCourses(){
+        return ResponseEntity.status(200).body(studentService.getCourses());
+    }
+    @GetMapping("courses/{name}")
+    public ResponseEntity getCourses(@PathVariable String name){
+       Course course = studentService.getCourseByName(name);
+        if(course != null){
+            return ResponseEntity.status(200).body(studentService.getCourseByName(name));
+        }
+        return ResponseEntity.status(400).body(new API("Could not find course with the name: " + name, 400));
+    }
+
     @PostMapping("register")
     public ResponseEntity addStudent(@RequestBody @Valid Student student){
-        Optional<Student> student1 = Optional.of(student);
-        if(student1.isPresent()){
+        if(student != null){
             studentService.registerStudent(student);
             return ResponseEntity.status(201).body(new API("Successfully Registered",201));
         }

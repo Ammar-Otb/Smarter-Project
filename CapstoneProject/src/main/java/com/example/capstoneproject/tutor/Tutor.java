@@ -18,6 +18,8 @@ import java.util.UUID;
 @AllArgsConstructor @NoArgsConstructor @Setter @Getter
 @Entity
 public class Tutor {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private static String role = "ROLE_TUTOR";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tutorId;
@@ -31,8 +33,7 @@ public class Tutor {
     private String email;
     @NotNull(message = "Password must not be null")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",
-            message = "Password must contain eight characters, at least one uppercase letter, one lowercase letter and one number")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Password must contain eight characters, at least one uppercase letter, one lowercase letter and one number")
     private String password;
     @NotNull(message = "Enter the nationality")
     private String nationality;

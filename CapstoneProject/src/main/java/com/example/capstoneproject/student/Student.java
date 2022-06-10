@@ -15,6 +15,8 @@ import java.util.Set;
 @AllArgsConstructor @NoArgsConstructor @Setter @Getter
 @Entity
 public class Student {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private static String role = "ROLE_STUDENT";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer studentId;

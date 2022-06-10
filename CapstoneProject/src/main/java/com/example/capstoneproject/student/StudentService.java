@@ -1,5 +1,7 @@
 package com.example.capstoneproject.student;
 
+import com.example.capstoneproject.courses.Course;
+import com.example.capstoneproject.courses.CourseService;
 import com.example.capstoneproject.session.MySession;
 import com.example.capstoneproject.session.SessionService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,8 @@ import java.util.Optional;
 public class StudentService {
     private final StudentRepository studentRepository;
     private final SessionService sessionService;
+    private final CourseService courseService;
+
     public List getStudents(){
         return studentRepository.findAll();
     }
@@ -52,4 +56,12 @@ public class StudentService {
     public void deleteStudent(Integer id){
         studentRepository.deleteById(id);
     }
+
+    public List getCourses(){
+        return courseService.getCourses();
+    }
+    public Course getCourseByName(String name){
+        return courseService.findCourseByName(name);
+    }
+
 }
