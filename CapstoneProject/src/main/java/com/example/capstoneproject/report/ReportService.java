@@ -22,6 +22,7 @@ public class ReportService {
         return reportRepository.findById(id).get();
     }
 
+
 //    public void addReport(ReportDTO reportDTO){
 //        MySession session = sessionService.findSession(reportDTO.getSessionId());
 //        Report report = new Report(null,reportDTO.getDate(), reportDTO.getReportDetails(), session);

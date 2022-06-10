@@ -23,7 +23,7 @@ public class Report {
     @NotNull(message = "Report cannot be empty, please fill the details")
     private String reportDetails;
 
-    
+
 
 
 

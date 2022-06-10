@@ -42,4 +42,10 @@ public class MySession {
     @JsonIgnore
     private Student student;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "report_id",
+            referencedColumnName = "id"
+    )
+    private Report report;
+
 }

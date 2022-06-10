@@ -4,6 +4,7 @@ import com.example.capstoneproject.DTO.API;
 import com.example.capstoneproject.DTO.ReportDTO;
 import com.example.capstoneproject.courses.Course;
 import com.example.capstoneproject.courses.CourseService;
+import com.example.capstoneproject.report.Report;
 import com.example.capstoneproject.report.ReportService;
 import com.example.capstoneproject.session.MySession;
 import com.example.capstoneproject.session.SessionService;
@@ -68,7 +69,7 @@ public class TutorController {
             return ResponseEntity.status(400).body(new API("Data invalid", 400));
         sessionService.createSession(session);
         if(tutorService.createSessionWithTutorId(session,id)){
-            return ResponseEntity.status(201).body(new API("Successfully added subject!!", 201));
+            return ResponseEntity.status(201).body(new API("Successfully created session!", 201));
         }
         return ResponseEntity.status(400).body(new API("Invalid Tutor id", 400));
     }
@@ -85,9 +86,14 @@ public class TutorController {
 
     }
 
-//    @PostMapping("report")
-//    public ResponseEntity addReport(@RequestBody ReportDTO rd){
-//        reportService.addReport(rd);
-//        return ResponseEntity.status(HttpStatus.CREATED).body("Added report to session");
-//    }
+    @PostMapping("report/{sessionId}")
+    public ResponseEntity addReport(@RequestBody Report report, @PathVariable Integer sessionId){
+        try {
+            sessionService.reportSession(report, sessionId);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Added report to session");
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Sesssion Id invalid");
+        }
+    }
 }

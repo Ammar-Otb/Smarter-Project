@@ -1,5 +1,6 @@
 package com.example.capstoneproject.session;
 
+import com.example.capstoneproject.report.Report;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,12 @@ public class SessionService {
     }
     public void deleteSession(Integer sessionId){
         mySessionRepository.deleteById(sessionId);
+    }
+
+    public void reportSession(Report report, Integer sessionId) throws Exception{
+        MySession session = findSession(sessionId);
+        session.setReport(report);
+        mySessionRepository.save(session);
+
     }
 }
