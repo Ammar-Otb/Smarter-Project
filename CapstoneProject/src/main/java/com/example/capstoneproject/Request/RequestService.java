@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service @RequiredArgsConstructor
 public class RequestService {
@@ -59,6 +60,7 @@ public class RequestService {
         requestRepository.save(request);
         sessionService.createSession(session);
         createSessionWithTutorId(session,tutorId);
+        addSessionToStudent(request.getStudentId(), session.getSessionId());
     }
     public void createSessionWithTutorId(MySession session, Integer id) throws Exception {
         Tutor t = tutorRepository.findById(id).get();
@@ -67,6 +69,20 @@ public class RequestService {
             tutorRepository.save(t);
         }else
             throw new Exception("Tutor not found");
+
+    }
+
+    public void addSessionToStudent(Integer studentId, Integer sessionId) throws Exception {
+        Student student = studentRepository.findById(studentId).get();
+        MySession session = sessionService.findSession(sessionId);
+        if(student != null){
+            if(session != null){
+                student.getStudentSessions().add(session);
+                studentRepository.save(student);
+            } else
+                throw new Exception("Student Cannot be null");
+        }else
+            throw new Exception("Student Cannot be null");
 
     }
 }

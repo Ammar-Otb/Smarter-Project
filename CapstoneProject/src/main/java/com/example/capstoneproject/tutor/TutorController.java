@@ -81,12 +81,12 @@ public class TutorController {
 ////        }
 //    }
 
-    @PostMapping("add/student/{studentId}/{sessionId}")
-    public ResponseEntity addSessionToStudent(@PathVariable Integer studentId, @PathVariable Integer sessionId){
-        if(studentService.addSessionToStudent(studentId,sessionId))
-            return ResponseEntity.status(201).body("Successfully added student session");
-        return ResponseEntity.status(400).body(new API("Invalid data", 400));
-    }
+//    @PostMapping("add/student/{studentId}/{sessionId}")
+//    public ResponseEntity addSessionToStudent(@PathVariable Integer studentId, @PathVariable Integer sessionId){
+//        if(studentService.addSessionToStudent(studentId,sessionId))
+//            return ResponseEntity.status(201).body("Successfully added student session");
+//        return ResponseEntity.status(400).body(new API("Invalid data", 400));
+//    }
 
     @DeleteMapping("delete/session/{id}")
     public ResponseEntity deleteSession(@PathVariable Integer id){

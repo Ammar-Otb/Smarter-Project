@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/api/v1/tutor/register","/api/v1/student/register","/api/v1/course/","/api/v1/tutor/","/api/v1/student/","/api/v1/request/").permitAll()
                 .antMatchers("/api/v1/tutor/course/add/{courseId}/{tutorId}","/api/v1/tutor/create/session/{tutorId}","/api/v1/tutor/add/student/{studentId}/{sessionId}",
-                        "/api/v1/tutor/delete/session/{id}","/api/v1/tutor/report/{sessionId}","/api/v1/request/accept/{tutorId}/{requestId}").hasRole("TUTOR")
+                        "/api/v1/tutor/delete/session/{id}","/api/v1/tutor/report/{sessionId}","/api/v1/request/accept/{tutorId}/{requestId}", "/api/v1/tutor/delete/session/{id}").hasRole("TUTOR")
                 .antMatchers("/api/v1/request/send", "/api/v1/student/update/email/{studentId}/{email}","/api/v1/student/courses/{name}","/api/v1/student/courses" ).hasRole("STUDENT")
                 .anyRequest().authenticated()
                 .and().httpBasic();
