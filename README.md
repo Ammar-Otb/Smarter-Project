@@ -1,1 +1,2 @@
-# updated-project
+# Smarter Project
+Hello
