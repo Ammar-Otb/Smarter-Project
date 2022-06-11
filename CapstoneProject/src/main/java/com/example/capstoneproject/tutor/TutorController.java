@@ -23,8 +23,7 @@ public class TutorController {
     private final TutorService tutorService;
     private final CourseService courseService;
     private final SessionService sessionService;
-    private final StudentService studentService;
-    private final RequestService requestService;
+
     @GetMapping("")
     public ResponseEntity<List<Tutor>> getTutors(){
         return ResponseEntity.status(200).body(tutorService.getTutors());
@@ -53,40 +52,14 @@ public class TutorController {
     }
 
     @PostMapping("course/add/{courseId}/{tutorId}")
-    public ResponseEntity addCourseToTutor(@PathVariable Integer tutorId, @PathVariable Integer courseId){
+    public ResponseEntity addCourseToTutor(@PathVariable Integer tutorId, @PathVariable Integer courseId) {
         Tutor tutor = tutorService.getTutorById(tutorId);
-        Optional<Tutor> tutor1 = Optional.of(tutor);
-        if(tutor1.isEmpty()){
+        if(tutor == null){
             return ResponseEntity.status(400).body(new API("Data invalid", 400));
         }
         courseService.addTutorToSubject(courseId, tutor);
         return ResponseEntity.status(201).body(new API("Successfully added subject!!", 201));
     }
-//    @PostMapping("create/session/{tutorId}")
-//    public ResponseEntity createSession(@RequestBody MySession session, @PathVariable Integer tutorId, @PathVariable Integer requestId) throws Exception {
-//        Optional<MySession> session1 = Optional.of(session);
-//        if(session1.isEmpty())
-//            return ResponseEntity.status(400).body(new API("Data invalid", 400));
-//        sessionService.createSession(session);
-//        requestService.createSessionWithTutorId(session,tutorId);
-//            return ResponseEntity.status(201).body(new API("Successfully created session!", 201));
-//
-////        return ResponseEntity.status(400).body(new API("Invalid Tutor id", 400));
-////        try {
-////            tutorService.acceptRequest(requestId,tutorId,session);
-////            return ResponseEntity.status(201).body(new API("Successfully created accepted and created session!", 201));
-////        }
-////        catch (Exception e){
-////            return ResponseEntity.status(400).body(new API("Invalid Data Entered, please recheck the data you entered", 400));
-////        }
-//    }
-
-//    @PostMapping("add/student/{studentId}/{sessionId}")
-//    public ResponseEntity addSessionToStudent(@PathVariable Integer studentId, @PathVariable Integer sessionId){
-//        if(studentService.addSessionToStudent(studentId,sessionId))
-//            return ResponseEntity.status(201).body("Successfully added student session");
-//        return ResponseEntity.status(400).body(new API("Invalid data", 400));
-//    }
 
     @DeleteMapping("delete/session/{id}")
     public ResponseEntity deleteSession(@PathVariable Integer id){
@@ -97,7 +70,6 @@ public class TutorController {
 
     @PostMapping("report/{sessionId}")
     public ResponseEntity addReport(@RequestBody Report report, @PathVariable Integer sessionId){
-//        SecurityContextHolder.getContext().getAuthentication().getPrincipal()
         try {
             sessionService.reportSession(report, sessionId);
             return ResponseEntity.status(HttpStatus.CREATED).body("Added report to session");

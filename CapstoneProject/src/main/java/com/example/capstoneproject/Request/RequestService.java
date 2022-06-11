@@ -1,20 +1,16 @@
 package com.example.capstoneproject.Request;
 
 import com.example.capstoneproject.courses.Course;
-import com.example.capstoneproject.courses.CourseService;
 import com.example.capstoneproject.session.MySession;
 import com.example.capstoneproject.session.SessionService;
 import com.example.capstoneproject.student.Student;
 import com.example.capstoneproject.student.StudentRepository;
-import com.example.capstoneproject.student.StudentService;
 import com.example.capstoneproject.tutor.Tutor;
 import com.example.capstoneproject.tutor.TutorRepository;
-import com.example.capstoneproject.tutor.TutorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service @RequiredArgsConstructor
 public class RequestService {
