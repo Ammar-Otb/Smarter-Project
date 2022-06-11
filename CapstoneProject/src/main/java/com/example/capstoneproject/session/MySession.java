@@ -25,7 +25,7 @@ public class MySession {
     private Integer sessionId;
     private String date;
     private String time;
-    @Pattern(regexp = "(?i)(Expired|Upcomin)")
+    @Pattern(regexp = "(?i)(Expired|Upcoming)")
     private String status;
 
 

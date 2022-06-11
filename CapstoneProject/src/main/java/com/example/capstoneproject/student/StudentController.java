@@ -34,12 +34,13 @@ public class StudentController {
     }
 
     @PostMapping("register")
-    public ResponseEntity addStudent(@RequestBody @Valid Student student){
-        if(student != null){
+    public ResponseEntity addStudent(@RequestBody @Valid Student student) throws Exception{
+        try{
             studentService.registerStudent(student);
-            return ResponseEntity.status(201).body(new API("Successfully Registered",201));
+            return ResponseEntity.status(201).body(new API("Successfully Registered Student",201));
+        }catch (Exception e){
+            return ResponseEntity.status(400).body(new API("Could not register, check your data again.", 400));
         }
-        return ResponseEntity.status(400).body(new API("Could not register", 400));
     }
 
     @DeleteMapping("delete/student/{id}")

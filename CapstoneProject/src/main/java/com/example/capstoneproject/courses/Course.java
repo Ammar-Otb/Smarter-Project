@@ -25,7 +25,10 @@ public class Course {
             joinColumns = @JoinColumn(
                     name = "course_id",
                     referencedColumnName = "courseId"
-            ), inverseJoinColumns =@JoinColumn(name = "tutor_id", referencedColumnName = "tutorId")
+            ),
+            inverseJoinColumns =@JoinColumn(
+                    name = "tutor_id",
+                    referencedColumnName = "tutorId")
     )
     private Set<Tutor> tutors;
 }

@@ -1,7 +1,5 @@
 package com.example.capstoneproject.report;
 
-import com.example.capstoneproject.DTO.ReportDTO;
-import com.example.capstoneproject.session.MySession;
 import com.example.capstoneproject.session.SessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
